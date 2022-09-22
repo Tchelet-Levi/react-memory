@@ -1,0 +1,50 @@
+.board-container {
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 1rem;
+}
+
+.board-wrapper {
+  width: 100%;
+
+  max-width: 90vw;
+  margin: 0 auto;
+
+  // The average distance away from the cards the player would be looking at
+  perspective: 25cm;
+  &.in-menu {
+    .board {
+      rotate: x 90deg;
+      translate: 0 15cm 0;
+      opacity: 0;
+    }
+  }
+
+  &.game-visible {
+    .board {
+      translate: 0 5cm 0;
+    }
+  }
+}
+
+.board {
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+
+  transform-style: preserve-3d;
+
+  width: 100%;
+  height: 100%;
+
+  transform-origin: bottom;
+
+  transition: all 1s ease;
+  transition-property: rotate, translate, opacity;
+
+  gap: 1rem;
+}

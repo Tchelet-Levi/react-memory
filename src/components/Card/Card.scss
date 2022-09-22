@@ -1,0 +1,142 @@
+.card-wrapper {
+  cursor: pointer;
+
+  transform-style: preserve-3d;
+
+  line-height: 0;
+  color: var(--text-primary);
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+
+  border-radius: 0.75rem;
+
+  &:hover {
+    --primary-color: #d9173b;
+  }
+
+  &.flip-360 {
+    transition-duration: 1.25s;
+    transition-timing-function: cubic-bezier(0.14, 0.6, 0.17, 1);
+    transition-property: rotate;
+    transition-delay: calc((400ms / var(--total-number-of-cards)) * var(--flip-idx));
+
+    rotate: y 360deg;
+  }
+
+  @media (min-width: 1440px) {
+    --card-height: 10rem;
+    --card-width: calc(10rem * 0.75);
+
+    font-size: 4rem;
+  }
+}
+
+.card {
+  pointer-events: none;
+  user-select: none;
+
+  height: var(--card-height);
+  width: var(--card-width);
+
+  rotate: y 180deg;
+
+  transform-style: preserve-3d;
+  transition: rotate 0.75s cubic-bezier(0.14, 0.6, 0.17, 1);
+
+  &.flipped {
+    rotate: y 0deg;
+  }
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  transform-style: preserve-3d;
+
+  display: grid;
+  place-content: center;
+
+  height: var(--card-height);
+  width: var(--card-width);
+
+  border: solid 0.25rem var(--primary-color);
+  border-radius: 0.75rem;
+  background-color: white;
+
+  will-change: translate, rotate; // fixes blurry as hell element.
+}
+
+.char,
+.char-shadow {
+  display: block;
+
+  translate: 0 0 10px;
+
+  backface-visibility: visible;
+}
+
+.char-shadow {
+  translate: 0px 0px 0;
+  color: var(--primary-color);
+}
+
+.card-front {
+  translate: 0 0 1px;
+
+  // Backface culling fix
+  &::before {
+    content: "";
+    position: absolute;
+    left: -0.25rem;
+    right: -0.25rem;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    border-radius: 0.75rem;
+
+    background-color: var(--primary-color);
+    translate: 0 0 -0.1px;
+    rotate: y 180deg;
+  }
+}
+
+.card-back {
+  translate: 0 0 -1px;
+  rotate: y 180deg;
+
+  background-color: var(--primary-color);
+
+  // Backface culling fix
+  &::before {
+    content: "";
+    position: absolute;
+    left: -0.25rem;
+    right: -0.25rem;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    border-radius: 0.75rem;
+
+    background-color: var(--primary-color);
+    translate: 0 0 -0.1px;
+    rotate: y 180deg;
+  }
+
+  // Ornament
+  &::after {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    translate: -50% -50%;
+
+    width: calc(var(--card-width) / 1.5);
+    height: calc(var(--card-width) / 1.5);
+
+    border-radius: 100vmax;
+    outline: solid 0.5rem rgba($color: #000000, $alpha: 0.12);
+    outline-offset: 0.5rem;
+    background-color: rgba($color: #000000, $alpha: 0.12);
+  }
+}

@@ -1,0 +1,71 @@
+:root {
+  --primary-color: #f6294f;
+  --text-primary: #1f1f1f;
+
+  --card-height: 8rem;
+  --card-width: calc(8rem * 0.75);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  height: 100%;
+
+  font-size: 2rem;
+
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  position: relative;
+  padding: 1rem;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.menu {
+  position: absolute;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  left: 50%;
+  translate: -50% 0 0;
+
+  z-index: 10;
+
+  transition: all 1s ease;
+  transition-property: rotate, translate;
+
+  &.game-visible {
+    translate: -50% 0 0;
+    z-index: 10;
+  }
+
+  &.hidden {
+    pointer-events: none;
+    translate: -50% -100vh 0;
+    rotate: x 10deg;
+  }
+}
+
+.level-btn {
+  cursor: pointer;
+
+  &:hover {
+    background: #f64767;
+  }
+
+  background: var(--primary-color);
+  border: none;
+  padding: 1rem;
+  color: white;
+  border-radius: 100vmax;
+  height: fit-content;
+}
